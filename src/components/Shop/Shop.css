@@ -1,5 +1,23 @@
 .products-container {
     padding-top: 60px;
-    padding-left: 80px;
+    padding-left: 60px;
+    padding-right: 0px;
     gap: 20px;
+}
+
+.row {
+    width: 100%;
+    margin-right: none;
+}
+
+.btn-pm {
+    border-color: white;
+    color: white;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-nb {
+    border-radius: 50px;
+    margin-bottom: 10px;
 }

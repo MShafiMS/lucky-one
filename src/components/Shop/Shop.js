@@ -1,10 +1,40 @@
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
+
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  Modal.setAppElement('#root');
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [modalIsOpen, setIsOpen] =    useState(false);
+    // const carts = [setCart]
+    console.log(cart)
+    // const randCarts = carts[Math.floor(Math.random()*carts.length)];
+    
+    
+    
+    function openModal() {
+        // setCart(randCarts);
+        setIsOpen(true);
+      }
+
+    function closeModal() {
+        setIsOpen(false);
+      }
 
     useEffect(() => {
         fetch('fakeData.json')
@@ -16,6 +46,10 @@ const Shop = () => {
         console.log(product)
         const newCart = [...cart, product];
         setCart(newCart);
+    }
+
+    function emptyCart(){
+        setCart([]);
     }
 
     return (
@@ -30,11 +64,31 @@ const Shop = () => {
                 }
             </div>
             <div className="cart-container col-md-3 bg-secondary">
-                <h3>order summary</h3>
                 <div>
-                    <p>{cart.length}</p>
+                    <h3 className='text-white pt-2'>Order Summary</h3>
+                    {cart.map((item) => (
+                    <Cart key={item.id} item={item}></Cart>
+                    ))}
                 </div>
+                <button onClick={openModal} className="btn-pm btn btn-outline-dark">
+                        Chose 1 for me
+                    </button>
+                    <br />
+                <button onClick={emptyCart} className="btn-pm btn btn-outline-dark">
+                        Chose Again
+                    </button>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <button onClick={closeModal} className="btn-nb btn btn-outline-danger">x</button>
+                <div>
+                    
+                </div>
+            </Modal>
         </div>
     );
 };
