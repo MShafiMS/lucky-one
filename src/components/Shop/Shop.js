@@ -21,14 +21,14 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [modalIsOpen, setIsOpen] =    useState(false);
-    // const carts = [setCart]
-    console.log(cart)
-    // const randCarts = carts[Math.floor(Math.random()*carts.length)];
+
+
+   
     
     
     
     function openModal() {
-        // setCart(randCarts);
+   
         setIsOpen(true);
       }
 
@@ -86,7 +86,9 @@ const Shop = () => {
             >
                 <button onClick={closeModal} className="btn-nb btn btn-outline-danger">x</button>
                 <div>
-                    
+                {cart.map((item) => (
+                    <Cart key={item.id} item={item}></Cart>
+                    ))}
                 </div>
             </Modal>
         </div>
